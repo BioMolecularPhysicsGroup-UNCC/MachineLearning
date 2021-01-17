@@ -342,7 +342,7 @@ iter = 0;
       disp( dividerLine(msg) );
       rankName = [prefix,'rankX',num2str(iter,'%02i')];
       [rankX,T] = classifyDataStream(rankName,AmatrixInfoX, ... 
-                                     AmatrixInfoF,AmatrixInfoN,Ud,3);
+                                     AmatrixInfoF,AmatrixInfoN,Ud,0);
                                          % plot visual results => 3
                                % skip visual results on screen => 2
 %       traitX2 = getMultivariateStats4sploc(AmatrixInfoX,ns2,0,mType);

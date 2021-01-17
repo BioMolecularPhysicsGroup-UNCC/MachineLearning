@@ -113,7 +113,10 @@ function [splocResults,mapU2S,mapS2U] = ...
       error('95% is the maximum voting threshold used in sploc!');
       end
    voteThreshold = vT;
-   end   
+   end 
+   if( ~isreal(U) )
+   error('Input matrix U is not real');
+   end
 %%                                     extract data from trait1 and trait0
 n1 = trait1.n;
 M1 = trait1.mu;
