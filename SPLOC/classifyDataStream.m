@@ -119,6 +119,8 @@ function [ranking,T] = classifyDataStream(fname,dataU,dataF,dataN, ...
 % 2) calculate Npdf using known pooled data matrix for N-systems.
 % 3) calculate Updf using test data matrix for U-systems. 
 % 4) calculate overlap integrals for all NF, UF and UN pairs per mode.
+%    This uses 'ksdensity' by default but by setting 'dType' in
+%    initalizeSPLOC() to 'pdfest' it will use PDFAnalyze.
 %   --> NF and UF pairs use discriminant-sigmodal since interested in how 
 %       different F is to either N or U. F should be different to N.
 %   --> UN pairs use indifference-sigmodal since interested in how similar
@@ -172,6 +174,7 @@ function [ranking,T] = classifyDataStream(fname,dataU,dataF,dataN, ...
 %                data, where each mode lives in a nV dimensional space. 
 %%                                                    set sploc parameters
 global gvSPLOC
+dType = gvSPLOC.dType;                   % choose density estimator to use
 % ---------------------------- define discriminant weighting from overlaps
 dWtOVL = gvSPLOC.dWtOVL;          % discriminant probability weight factor
 %iWtOVL = gvSPLOC.iWtOVL;         % indifference probability weight factor
@@ -330,15 +333,25 @@ PDF0 = cell(N0,nModes);
 PRJ0 = cell(N0,nModes);
 % ------------------------------------------- project into unknown systems
    for ju=1:Nu 
-   [modePROJ,modePDF] = generateModePDF(Au{ju},U);
-      for j=1:nModes
-      PRJu{ju,j} = modePROJ{j};
-      PDFu{ju,j} = modePDF{j};
-      end
+   if (strcmp(dType,'kde'))
+    [modePROJ,modePDF] = generateModePDFks(Au{ju},U);
+   else
+    %disp("I am using the correct estimator pdfest=PDFAnalyze") % Debugging
+    [modePROJ,modePDF] = generateModePDFpdfest(Au{ju},U);
+   end
+          for j=1:nModes
+          PRJu{ju,j} = modePROJ{j};
+          PDFu{ju,j} = modePDF{j};
+          end
    end
 % ---------------------------------------- project into functional systems
    for j1=1:N1 
-   [modePROJ,modePDF] = generateModePDF(A1{j1},U);
+   if (strcmp(dType,'kde'))
+    [modePROJ,modePDF] = generateModePDFks(A1{j1},U);
+   else
+    %disp("I am using the correct estimator pdfest=PDFAnalyze") % Debugging
+    [modePROJ,modePDF] = generateModePDFpdfest(A1{j1},U);
+   end
       for j=1:nModes
       PRJ1{j1,j} = modePROJ{j};
       PDF1{j1,j} = modePDF{j};
@@ -346,7 +359,12 @@ PRJ0 = cell(N0,nModes);
    end
 % ------------------------------------- project into nonfunctional systems
    for j0=1:N0 
-   [modePROJ,modePDF] = generateModePDF(A0{j0},U);
+   if (strcmp(dType,'kde'))
+    [modePROJ,modePDF] = generateModePDFks(A0{j0},U);
+   else
+    %disp("I am using the correct estimator pdfest=PDFAnalyze") % Debugging
+    [modePROJ,modePDF] = generateModePDFpdfest(A0{j0},U);
+   end
       for j=1:nModes
       PRJ0{j0,j} = modePROJ{j};
       PDF0{j0,j} = modePDF{j};
