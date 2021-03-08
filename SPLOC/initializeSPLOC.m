@@ -20,7 +20,12 @@ function initializeSPLOC(varargin)
 %               read => command line query to user
 %               allowed types: {'fig','eps','png','jpg','pdf','bmp','tif'}
 % 'wType'       {'fresh','append'} => start new file or append to previous
-
+% 'dType'       density estimation type for ClassifyDataMoments
+%               {'kde', 'pdfest'} -> MATLAB kernel density estimator OR 
+%                                    Jenny Farmer's PDF Estimator
+%                     Note: To use PDF Estimator it must be installed which
+%                     can be done easily through MATLABs add-on browser
+%                     Details: https://github.com/jennyfarmer/PDFAnalyze
 % USAGE: initializeSPLOC                              % all defaults apply
 %        initializeSPLOC(3)   % set verbosity = 3 all other defaults apply
 %        initializeSPLOC('gType','jpg') 
@@ -54,6 +59,10 @@ addParameter(p,'gType','read', ...
 expectedWtype = {'fresh','append'};
 addParameter(p,'wType','fresh', ...
              @(x) any(validatestring(x,expectedWtype)));
+% ----------------------------------------------------------- density type
+expectedDtype = {'kde', 'pdfest'};
+addParameter(p,'dType','kde', ...
+             @(x) any(validatestring(x,expectedDtype)));
 % ------------------------------------------------------------------------
 parse(p,varargin{:});
 %%                                                  define local variables
@@ -61,6 +70,7 @@ verbosity = round(p.Results.verbosity);
 gFileType = p.Results.gType;
 wType = p.Results.wType;
 fName = p.Results.fName;
+dType = p.Results.dType;
 % -------------------------------------------------- create sploc log file
 splocLogFile = [fName,'.log'];
 subFolder = 'splocLog';
@@ -118,6 +128,7 @@ gvSPLOC = struct;
 gvSPLOC.strDate = strDate;                         % may be used elsewhere
 gvSPLOC.gFileType = gFileType;                    % used in saveas command
 gvSPLOC.splocLogFile = splocLogFile;
+gvSPLOC.dType = dType;                    % This if for classifyDataStream
 %%                                                verbosity control levels
 %
 % FIX ME  Not implemented yet. This will be an upgrade from 4 to 7 levels.
