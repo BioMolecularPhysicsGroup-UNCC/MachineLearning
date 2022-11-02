@@ -88,7 +88,7 @@ def Adjust_predictions(minseq,maxseq,result_array,seq):
                     if cds/noncds > initial_voting_threshold:
                         potential_exon_sites.append((i,j,cds/noncds,"Start"))                   
     
-        if sequence[i:i+2].upper() == "GT":
+        if sequence[i:i+3].upper() in ["AAG","CAG","TAG"]:
             for j in range(i+min_cds_length,i+max_cds_length):
                 if sequence[j:j+3].upper() in ["TAG","TAA","TGA"]:
                     cds = sum(pred[i:j])
@@ -96,7 +96,7 @@ def Adjust_predictions(minseq,maxseq,result_array,seq):
                     if cds/noncds > initial_voting_threshold:
                         potential_exon_sites.append((i,j,cds/noncds,"Stop"))
     
-        if sequence[i:i+2].upper() == "AG":
+        if sequence[i:i+3].upper() in ["AAG","CAG","TAG"]:
             for j in range(i+min_cds_length,i+max_cds_length):
                 if sequence[j:j+2].upper() == "GT":
                     cds = sum(pred[i:j])
