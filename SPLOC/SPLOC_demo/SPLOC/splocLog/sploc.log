@@ -1,0 +1,4589 @@
+Supervised Projective Learning for Orthogonal Congruences (SPLOC) 
+MATLAB SPLOC toolset version2020b 
+initializeSPLOC() 
+date = 29_Nov_2023_13_55_41 
+-------------------------------------------------- file type for output graphics 
+graphics file type =  
+png 
+--------------------------------------------------------------------- seed input 
+seed selection = shuffle 
+---------------------------------------------------- congruency spectrum toggles 
+split SPLOC spectrum = -1 
+ show geometric mean = 0 
+ i-mode/d-mode scale = 0.1 
+------------------------------------------------------------ Employed thresholds 
+      maximum allowed indifference score = 1.3 
+      minimum allowed discriminant score = 2 
+minimum allowed quality for d- or i-mode = 1 
+------------------------------------------------- ln(score) activation functions 
+indifference ln(score) pivot = 0.26236 
+indifference ln(score) range = 0.13733 
+discriminant ln(score) pivot = 0.69315 
+discriminant ln(score) range = 0.13733 
+----------------------------------------------- Gaussian overlap integral tables 
+input files: overlapMatrix4SPLOC.txt 
+             overlapXvalue4SPLOC.txt 
+             overlapYvalue4SPLOC.txt 
+   length of X0_signal = 491 
+   length of Y0_ln_r   = 331 
+total # of grid points = 162521 
+--------------------------------------------------- overlap activation functions 
+indifference overlap pivot = 0.85305 
+indifference overlap range = 0.02808 
+discriminant overlap pivot = 0.56108 
+discriminant overlap range = 0.0903 
+          number of trials = 37808135 
+ net sampling: cpu seconds = 16.9 
+------------------------------------------------ vote threshold heristic formula 
+   nV = # of variables for all systems 
+  nD0 = total # of data observations for systems-0 
+  nD1 = total # of data observations for systems-1 
+nDmin = MIN(nD0,nD1) 
+nDmax = MAX(nD0,nD1) 
+ Neff = 0.5*( nDmin + nDmin*( 2*nDmax/(nDmin + nDmax) )^2 ) 
+   pw = max(0,0.5 - 0.49999*sqrt(nV/Neff) ) 
+   vT = min(0.95, 0.5 + 0.9*(nV/Neff).^pw) 
+------------------------------------------------- consistency rank score formula 
+      N = # of sploc solutions under identical conditions 
+   MSIP = mean squared inner product 
+msip_dd = NxN matrix for discriminant-discriminant pairwise MSIPs 
+msip_ii = NxN matrix for indifference-indifference pairwise MSIPs 
+msip_di = NxN matrix for discriminant-indifference pairwise MSIPs 
+  score = 50*[sum(msip_dd) + sum(msip_ii) - 2*sum(msip_di)]/N 
+          maximum possible score = 100, used to rank consistency 
+          a greater score indicates a greater consistency 
+          a smaller score indicates high likelihood of outliers 
+-------------------------------------------------------------------------------- 
+   
+readFileNameList() 
+------------------------------------------------------------------ basic summary 
+       input file = input\DEMO_trainingSet 
+        selection = F 
+number of columns = 2 
+  number of files = 25 
+-------------------------------------------------------------------------------- 
+   
+readFileNameList() 
+------------------------------------------------------------------ basic summary 
+       input file = input\DEMO_trainingSet 
+        selection = N 
+number of columns = 2 
+  number of files = 25 
+-------------------------------------------------------------------------------- 
+   
+readDataMatrices() 
+------------------------------------------------------------------ basic summary 
+    reference name = functional 
+matrix format type = notVectored 
+    number of rows = 15 
+  min # of columns = 5000 
+  max # of columns = 5000 
+   # of A matrices = 25 
+-------------------------------------------------------------------------------- 
+   
+readDataMatrices() 
+------------------------------------------------------------------ basic summary 
+    reference name = nonfunctional 
+matrix format type = notVectored 
+    number of rows = 15 
+  min # of columns = 5000 
+  max # of columns = 5000 
+   # of A matrices = 25 
+-------------------------------------------------------------------------------- 
+   
+getMultivariateStats4sploc() 
+------------------------------------------------------------ calculation summary 
+    reference name = functional 
+matrix sample size = 5000 
+matrix format type = notVectored 
+  # of cM matrices = 25 
+ total sample size = 125000 
+    # of variables = 15 
+           cM type = cov 
+-------------------------------------------------------------------------------- 
+   
+getMultivariateStats4sploc() 
+------------------------------------------------------------ calculation summary 
+    reference name = nonfunctional 
+matrix sample size = 5000 
+matrix format type = notVectored 
+  # of cM matrices = 25 
+ total sample size = 125000 
+    # of variables = 15 
+           cM type = cov 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = checkpoint 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = internal 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+getBVStwoClasses() 
+------------------------------------------------------------ calculation summary 
+                base file name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        undetermined modes: Du = 15 
+        indifference modes: Di = 0 
+ # of variables = Dd + Du + Di = 15 
+  nonfunctional system dataset = nonfunctional 
+  # of nonfunction systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+     # of function systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+sploc() 
+------------------------------------------------------------ calculation summary 
+               sploc file name = DEMO 
+                  pursuit type = 0 
+initial basis set given by: try8 
+                vote threshold = 0.51878 
+        discriminant modes: dd = 0 
+        undetermined modes: du = 15 
+        indifference modes: di = 0 
+ # of variables = dd+du+di = d = 15 
+  nonfunctional system dataset = nonfunctional 
+# of nonfunctional systems: n0 = 25 
+      sample size per system-0 = 5000 
+total sample size for system-0 = 125000 
+     functional system dataset = functional 
+   # of functional systems: n1 =  25 
+      sample size per system-1 = 5000 
+total sample size for system-1 = 125000 
+-------------------------------------------------------------------------------- 
+   
+plotCongruencySpectrum() 
+------------------------------------------------------------------ basic summary 
+                reference name = DEMO 
+                vote threshold = 0.51878 
+                total efficacy = 0 
+        discriminant modes: Dd = 0 
+        dual-purpose modes: Ddi= 0 
+        undetermined modes: du = 15 
+        indifference modes: di = 0 
+ # of variables = Dd+Ddi+Du+Di = 15 
+-------------------------------------------------------------------------------- 
+   
+getFeatureVectors() 
+------------------------------------------------------------------ basic summary 
+           feature extraction:  
+  (from traitX) reference name = functional 
+number of X-systems classified = 25 
+  number of discriminant modes = 15 
+-------------------------------------------------------------------------------- 
+   
+getFeatureVectors() 
+------------------------------------------------------------------ basic summary 
+           feature extraction:  
+  (from traitX) reference name = nonfunctional 
+number of X-systems classified = 25 
+  number of discriminant modes = 15 
+-------------------------------------------------------------------------------- 

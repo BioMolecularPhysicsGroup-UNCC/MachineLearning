@@ -1,0 +1,7 @@
+layout for how feature vectors are packed for classification 
+    
+     Uk = basis vector in original space 
+    MUk = average component along the Uk projection. 
+    SDk = standard deviation along the Uk projection. 
+   Fvec = [MU1,SD1, MU2,SD2, MU3,SD3, ... MUn,SDn] 
+-------------------------------------------------------------------------------- 

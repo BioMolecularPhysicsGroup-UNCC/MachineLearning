@@ -1,0 +1,106 @@
+SPLOCtoolset is a collection of MATLAB functions to discriminate vectorized data
+primarily using the method of SPLOC, which is an acronym for Supervised 
+Projective Learning for Orthogonal Congruencies.  In development stage is 
+anothe method called mcsploc for multiclass generalization of sploc. 
+
+Most of the programs in this toolset have been updated intermittently and 
+are likely to function as intended. However, over time, functions that have
+not been used regularly may have gotten out of sync. Any problems with 
+functions that seem to produce an error (especially on input/output) could
+be a simple of matter of incompatiblity with versions. Please report this
+information to the Dr. Jacobs at djacobs1@uncc.edu or a BMPG member. 
+
+Where to start? 
+FIRST: Read this README file to completion before doing anything else. 
+
+Next step:
+Skim over (a quick read) splocToolsetVersion.m
+This MATLAB function does the least among all of the MATLAB functions in the 
+toolset. However, it documents the purpose of all the functions in the toolset.
+It is a useful MATLAB function, and should be updated along with all other
+updates of the SPLOCtoolset. Before spending time reading the comment statements
+carefully, it is advised to run the testDriver scripts that are included in the 
+SPLOCtoolset. Before this can happen, we need to have data to SPLOC. 
+
+Prepopulated input data:
+As one gets use to using the SPLOCtoolset, one can start from a clean directory.
+In this case, a user will supply his/her own data of interest. 
+However, a prepopulated directory called   input/  is included with the toolset.
+The input data was created from synthetic data. See note on this next.
+A new user need not worry about where to get data from to test how the functions
+work. All the testDriver scripts that have been included in the toolset use the
+data in the  input/  directory. 
+
+Synthetic data:
+Another directory called   syntheticData/   is included so the user can figure 
+out how the example data placed in  input/  was generated. In addition, the 
+code for how to generate the synthetic data is in this directory so a user can
+generate more synthetic data of a similar kind. 
+
+Running testDriver scripts:
+Passively reading   splocToolsetVersion.m   will not be very productive. To
+actively learn how to use the SPLOCtoolset, especially for first time users,
+spend time running each of the testDriver MATLAB scripts. Run them in the listed
+order below. These scripts serve two purposes. First, they are used by the 
+developers to test the code. Second, they help train new users figure out what
+the functions do, and if the users look at the scripts carefully, they can 
+figure out the function usage. By copy/paste, a new user will be able to 
+build their own script to analyze the data they want the way they want in 
+a short period of time. However, it is wise to test all the functions out 
+that are in the testDriver scripts in order to know what functionality is
+already available. Keep in mind that data structures are used, and the SPLOC 
+functions are designed to painless transfer the output data structure from 
+one function as an input into another. Many defaults are also assumed. As 
+such, it will take time for a new user to learn that most of the work is
+being done for them, but they have to know how to string the functions 
+together to fully analyze their data. Note that not all usage variations are
+explored in the testDriver scripts.  
+
+Run these:
+testDriver4control.m
+testDriver4input.m
+testDriver4training.m
+testDriver4unsupervised.m
+testDriver4classification.m
+testDriver4analysis.m
+testDriver4basisComparison.m
+testDriver4workflow01.m
+
+Standard directories:
+Note that the SPLOCtoolset will generate directories as you run different 
+functions. Data from certain functions get recorded in certain directories.
+The list of these special directories are:
+
+input/
+splocLOG/
+training/
+classification/
+basisComparison/
+analysis/
+
+In additon, when running  initializeSPLOC.m  for the first time, some data
+files will be produced that are precalculated tables used by some SPLOC 
+functions.  These tables are recorded in a directory called  splocLibrary/ 
+that is located in the MATLAB install directory. This automatically will 
+happen on the first run of  initializeSPLOC.m   which can take some time. 
+However, this is a one time initialization process on a given computer. 
+
+log files:
+In addition to output that often gets dumped into various directories 
+depending on the nature/objective of the fucntion, depending on verbosity,
+various summary information is written in log files. The main log file 
+is located in the directory   splocLOG/   in order to generate a history 
+of commands that were performed, with very basic summary information. 
+A more detailed and specialized summary for individual functions is also
+written (when the verbosity level enables it to write) into log files 
+that are located into specific directories.
+
+On Screen figures:
+Depending on verbosity, some of the data can be shown on the screen, and/or
+recorded in files. 
+
+UNIX/Linux versus Windows?
+Some effort was made to make this a universal toolset for all platforms. 
+However, it was only tested on Linux (actually MAC OS) and, some of the 
+scripts have unix system calls. So some bugs can be expected when using 
+a Windows operating system.  
