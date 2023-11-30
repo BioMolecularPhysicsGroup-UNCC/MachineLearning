@@ -1,1 +1,3 @@
 Trained random forest models go in this folder.
+
+Currently a reduced capacity model is included to save space due to full model file sizes.
