@@ -19,3 +19,7 @@ Rscript RF_predictions.R
 6. Run using:
 
 python3 CDS_predictions.py
+
+### Notes ###
+
+A small fasta file called Drosophila_2L_minimal.fna is included for testing purposes.
