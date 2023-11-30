@@ -1,0 +1,21 @@
+### Instructions for use of random forest gene prediction method ###
+
+Requires Python3 and R
+
+1. Set fasta file name in Sensor_data.py
+
+2. run using:
+
+python Sensor_data.py
+
+3. Set working directory and fasta file name in RF_predictions.R
+
+4. Run using:
+
+Rscript RF_predictions.R
+
+5. Set working directory and fasta file name in CDS_predictions.py
+
+6. Run using:
+
+python3 CDS_predictions.py
