@@ -6,7 +6,7 @@ Requires Python3 and R
 
 2. run using:
 
-python Sensor_data.py
+python3 Sensor_data.py
 
 3. Set working directory and fasta file name in RF_predictions.R
 
