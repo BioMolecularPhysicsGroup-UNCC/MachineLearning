@@ -19,7 +19,8 @@ species = "Drosophila_2L_minimal"
 
 ################################# OTHER PARAMETERS #################################
 
-kmer_species_list = ["Drosophila_2L"]
+kmer_species_list = ["Drosophila_2L","Human_21","Worm_I",
+                     "Arabidopsis_1","Saccharomyces_IV"]
 window_size = 99
 n_sensors = 14
 
