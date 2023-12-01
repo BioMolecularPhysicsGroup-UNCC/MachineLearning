@@ -1,3 +1,7 @@
 Trained random forest models go in this folder.
 
-Currently a reduced capacity model is included to save space due to full model file sizes.
+A reduced capacity model is included on GitHub to save space due to full model file sizes.
+
+In order to use the fully trained models, download and unzip Trained_models.zip from:
+
+https://drive.google.com/file/d/1TWhVsaMWaDJ5wcvVynJlOnThV6FDdc3f/view?usp=sharing
