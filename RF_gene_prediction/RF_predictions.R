@@ -8,7 +8,7 @@ test_species <- "Drosophila_2L_minimal"
 
 ### RF parameters ###
 
-Trained_model_name <- "10S_forest"
+Trained_model_name <- "100KS_2KT"
 
 ### Load trained RFs ###
 
@@ -30,7 +30,7 @@ write.csv(test_data, file = paste(kmer_sp,"_",test_sp,"_",input_name,"_test_resu
 
 }
 
-kmer_species_list <- list("Drosophila_2L")
+kmer_species_list <- list("Drosophila_2L","Human_21","Worm_I","Arabidopsis_1","Saccharomyces_IV")
 
 test_species_list <- list(test_species)
 
