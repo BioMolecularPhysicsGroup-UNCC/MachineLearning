@@ -1,6 +1,16 @@
-### Instructions for use of random forest gene prediction method ###
+### Random Forest Based Gene Prediction Method ###
+
+
+### Before using ###
+
+Download and unzip Trained_models.zip from:
+
+https://drive.google.com/file/d/1TWhVsaMWaDJ5wcvVynJlOnThV6FDdc3f/view?usp=sharing
 
 Requires Python3 and R
+
+
+### Instructions for use ###
 
 1. Set fasta file name in Sensor_data.py
 
@@ -19,6 +29,7 @@ Rscript RF_predictions.R
 6. Run using:
 
 python3 CDS_predictions.py
+
 
 ### Notes ###
 
