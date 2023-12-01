@@ -27,9 +27,9 @@ initial_cds_threshold = 0.9
 max_cds_threshold = 1.0
 threshold_step = 0.1
 
-kmer_species_list = ["Drosophila_2L"]
+kmer_species_list = ["Drosophila_2L","Human_21","Worm_I","Arabidopsis_1","Saccharomyces_IV"]
 
-model_name = "10S_forest"
+model_name = "100KS_2KT"
 
 #%%
 
