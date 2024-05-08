@@ -1,58 +1,91 @@
 
-################## NN gene prediction method instructions #####################
+#################################################
+NN gene prediction instructions
+#################################################
 
-Requires python3 and Tensorflow
+Requires python3, numpy and Tensorflow
 
-Many parameters are the same between functions. They are redundant so that saned files passed between functions will be compatible.
+Users must set parameters for functions before running each one.
 
+Some parameters control output file names so that files output by one function will be compatible with the next function.
 
-1. To run an out-of-the box test use the following commands
+#################################################
+
+Overview of how to use this method:
+
+(1) Place .fna and .gff3 files in the labeled folders in the same directory as the scripts.
+
+(2) Run Generate_sensor_data.py to create sensor data for sequences. Use a blank .gff3 file to generate sensor data for an unknown sequence.
+
+(3) Run Generate_training_dataset.py and Generate_test_dataset.py on sensor arrays from part (1) to organize sensor data for use in the next steps.
+
+(4) Run Train_dense_model.py to train NNs using training datasets
+
+(5) Run Test_dense_model.py to test the accuracy of the trained NNs or run Predict_CDS.py to predict CDS regions in unknown sequences
+
+Details about user set parameters for all scripts are given below.
+
+#################################################
+
+Note:
+
+The G3PO dataset uses .gar and .fasta files instead of .gff3  and .fna files.
+
+A special script must be used on .gar files in step (1) in order for subsequent scripts to run (see last entry on this page)
+
+A sample .gar file with associated .fasta file from G3PO is included as an example.
+
+#################################################
+
+To run an example of TRAINING and TESTING use the following commands:
 
 python3 Generate_sensor_data.py
 python3 Generate_training_dataset.py 
 python3 Generate_test_dataset.py 
 python3 Train_dense_model.py 
 python3 Test_dense_model.py
+python3 Predict_CDS.py
 
-This will use small sample fasta and gff3 files (included) to train and test the method quickly and make sure it is running
+This will use small sample .fna and .gff3 files (included) to train and test the method quickly using minimal default parameters and make sure it runs.
 
 #################################################
 
 
-2. Sensor data
+# Generate_sensor_data.py
+
+This script runs all sensor algorithms on the target sequence and produces arrays of sensor data.
 
 Sensor data must be generated for any DNA which is to be used for training or testing
 
-fasta files must be located in the fasta_files folder. Each fasta file must be a sinlge sequence with a header to be preceded by ">"
+.fna files must be located in the fasta_files folder. Each fasta file must be a sinlge sequence with a header to be preceded by ">"
 
-gff3 files must be located in the gff_files folder. The first column of each entry in the gff files will be refered to as the "chromosome" name of the entry.
+.gff3 files must be located in the gff_files folder. The first column of each entry in the .gff3 files will be refered to as the "chromosome" name of the entry.
 
 Parameters:
 
+sequence_list: A list of sequences you wish to generate sensor data for
 
-species_list: A list of species you wish to generate sensor data for
-
-chromosome_list: A list of chromosome names. Each species in the species_list must have a single element in this list at the same position in the list. When parsing the gff3 files, this list will specify which chromosomes to use.
+chromosome_list: A list of chromosome names. Each species in the species_list must have a single element in this list at the same position in the list. This is required to specify which chromosome to use when parsing .gff3 files.
 
 kmer_species_list: A list of species which will be used to train kmer frequency sensors. When generating test data, the kmer species must not match the test species.
 
-kmer_chromosome_list: A list of chromosome names. Each species in the kmer_species_list must have a single element in this list at the same position in the list. When parsing the gff3 files, this list will specify which chromosomes to use when training the kmer sensors.
+kmer_chromosome_list: When training kmer sensors, this list will specify which chromosomes to use for each entry in kmer_chromosome_list.
 
 window_size: The nucleotide width of all sensor algorithms to be used.
 
 n_sensors: the number of sensors being used must be specified here
 
-kmer_training_multiplier: sets the level of sampling used when training the kmer sensors. Seeting this to 1 results in a total number of kmers equal to (number_of_possible_kmers)*1000. This number can be set low (=0.001) when doing quick test runs on a personal computer. Setting this number higher than 1 requires significant resources.
+kmer_training_multiplier: sets the level of sampling used when training the kmer sensors. Seeting this to 1 results in a total number of kmers equal to (number_of_possible_kmers)*1000. This number can be set low (=0.001) when doing quick test runs. Setting this number higher than 1 requires significant resources.
 
 #################################################
 
-3. Training datasets
+# Generate_training_dataset.py
 
-Sensor data must be cut into training and test sets before use.
+This script converts sensor data arrays into TRAINING sets with user defined parameters.
 
 Parameters:
 
-species_list: must have entries which match previously generated by data from Generate_sensor_data.py
+sequence_list: must have entries which match previously generated by data from Generate_sensor_data.py
 
 window_size: must match the window size previously used by Generate_sensor_data.py
 
@@ -60,17 +93,17 @@ set_title: use this to name your datasets
 
 n_samples: the total number of samples to train on
 
-positive_fraction: the fraction of positive samples you wish to train on
+positive_fraction: the fraction of positive samples (coding) you wish to train on. 0.5 = 50% positive(coding) samples and 50% negative(non-coding) samples
 
 #################################################
 
-4. Test datasets
+# Generate_test_dataset.py
 
-Sensor data must be cut into training and test sets before use.
+This script converts sensor data arrays into TEST sets. By default, the entire sensor array is used as a test set.
 
 Parameters:
 
-species_list: must have entries which match previously generated by data from Generate_sensor_data.py
+sequence_list: must have entries which match previously generated by data from Generate_sensor_data.py
 
 kmer_species_list: must have entries which match previously generated by data from Generate_sensor_data.py
 
@@ -80,13 +113,15 @@ set_title: use this to name your datasets
 
 #################################################
 
-5. Training neural nets
+# Train_dense_model.py 
 
-A basic NN with 10 hidden neurons in a single layer is included. This can be modified.
+This script uses a training set created using the process above to train a NN. Parameters of the NN can be manually altered by a user.
+
+A default NN with 10 hidden neurons in a single layer is included.
 
 Parameters:
 
-species_list: must have entries which match previously generated by data from Generate_sensor_data.py
+sequence_list: must have entries which match previously generated by data from Generate_sensor_data.py
 
 set_title: must match a set title which was used to generate a training set
 
@@ -94,7 +129,7 @@ nepochs: the number of epochs to train the NN
 
 Neurons_per_layer: use this to describe the NN architecture once it is saved
 
-Training_fraction: must be of the form "pxx" where xx is an integer which specifies the positive_fraction used in the training set
+Training_fraction: must be of the form "pxx" where xx is an integer which specifies the positive fraction used in the training set. EXAMPLE: p50 means 50% of training samples are coding.
 
 window_size: must match the window size previously used by Generate_sensor_data.py
 
@@ -103,15 +138,15 @@ cross_validation: the number of cross validation sets to use. Each validation ru
 
 #################################################
 
-6. Testing neural nets
+# Test_dense_model.py
 
-In order to test the accuracy of trained models, sensor data must be previously generated for the test species.
+This script tests the accuracy of trained models against a sequence with known CDS regions.
 
 Parameters:
 
-Training_species: must have entries which match models previously trained on these species using the names in species_list used by Generate_sensor_data.py
+Training_species: must match a species previously used to train a model
 
-species_list: list of test species. Must have entries which match species_list names previously used by Generate_sensor_data.py
+sequence_list: list of test species. Must match output from Generate_test_dataset.py
 
 set_title: must match a set title which was used to generate a training set
 
@@ -121,7 +156,7 @@ Training_fraction: must match Training_fraction string of a previously trained N
 
 window_size: must match the window size previously used by Generate_sensor_data.py
 
-cross_validation: must match the number of cross validation steps used to train the models being called
+cross_validation: must match the number of cross validation steps used to train the models
 
 initial_voting_threshold: the lowest CDS/nonCDS threshold to consider
 
@@ -132,6 +167,29 @@ max_cds_length: the minimum length CDS regions to consider
 max_cds_threshold: the maximum CDS/nonCDS threshold to consider
 
 threshold_step: how much to increase the CDS/nonCDS threshold at each iteration
+
+#################################################
+
+# Predict_CDS.py
+
+This script makes a new .gff3 file with predicted CDS regions.
+
+Parameters are the same as Test_dense_model.py
+
+#################################################
+
+# G3PO dataset
+
+This dataset does not use .gff3 files to indicate exon locations. The .gar file format is used instead. This is not a normal feature format.
+
+A different script must be used to run sensors using .gar files.
+
+# Generate_sensor_data_gar.py
+
+This script will run sensors using .fasta and .gar files (instead of .fna and .gff3 files)
+
+Once sensor data has been generated sequences with .gar files, all other steps proceed as normal.
+
 
 
 

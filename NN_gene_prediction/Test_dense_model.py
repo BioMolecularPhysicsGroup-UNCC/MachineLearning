@@ -7,7 +7,6 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import gc
-import os
 
 #%%
 
@@ -15,12 +14,12 @@ import os
 
 Training_species="Drosophila_2L_minimal"
 Kmer_species=Training_species
-species_list = ["Drosophila_2L_minimal"]
+sequence_list = ["Drosophila_2L_minimal","A0A024G196_9STRA"]
 set_title = "DFT"
 Neurons_per_layer = "10D"
 Training_fraction = "p50"
 window_size = 69
-cross_validation = 5
+cross_validation = [0] # enter which model to use if multiple models were trained for cross validation
 
 ########### CDS prediction (post processing) #################################
 
@@ -192,6 +191,11 @@ def Adjust_predictions(minseq,maxseq,result_array,seq):
         specicifity = TN / (TN + FP)
         print("Specificity: ",np.round(specicifity,3))
         
+        # Precision = TP / (TP + FP)
+        
+        precision = TP / (TP + FP)
+        print("Precision: ",np.round(precision,3))
+        
         # F1 score = TP / ( TP + 0.5*(FP + FN) )
         
         F1 = TP / ( TP + FP/2 + FN/2 )
@@ -202,7 +206,8 @@ def Adjust_predictions(minseq,maxseq,result_array,seq):
         print("Start exons:",np.round(start_exons,3))
         print("Stop exons:",np.round(stop_exons,3))  
         print("Internal exons:",np.round(internal_exons,3))
-        print("OUTPUT EXON",Training_species,Kmer_species,Test_species,"SN",np.round(sensitivity,3),"SP",np.round(specicifity,3),"F1",np.round(F1,3),"CDSF",np.round(cds_fraction,3),"THR",np.round(threshold,3))
+        print("CDS fraction:", np.round(cds_fraction,3))
+#        print("OUTPUT EXON",Training_species,Kmer_species,Test_sequence,"SN",np.round(sensitivity,3),"SP",np.round(specicifity,3),"F1",np.round(F1,3),"CDSF",np.round(cds_fraction,3),"THR",np.round(threshold,3))
         print("--------------------------------------------------")
     
 #%%
@@ -228,30 +233,6 @@ def test_nn(name,val_set,model,x_tests,y_test,seq):
     result_array = np.concatenate((y_test,pred),axis=0)
     result_array.shape = (2,y_test.shape[0])
     
-    parent_dir = "./"
-    new_dir = "Dense_results"
-    path = os.path.join(parent_dir, new_dir)
-    if not os.path.isdir(path):
-        os.mkdir(path)
-    
-    parent_dir = "./Dense_results"
-    new_dir = f"{Training_species}"
-    path = os.path.join(parent_dir, new_dir)
-    if not os.path.isdir(path):
-        os.mkdir(path)
-    
-    parent_dir = f"./Dense_results/{Training_species}"
-    new_dir = f"{Test_species}"    
-    path = os.path.join(parent_dir, new_dir)
-    if not os.path.isdir(path):
-        os.mkdir(path)
-        
-    parent_dir = f"./Dense_results/{Training_species}/{Test_species}"
-    new_dir = f"{Training_fraction}"    
-    path = os.path.join(parent_dir, new_dir)
-    if not os.path.isdir(path):
-        os.mkdir(path)
-   
     ################### calculate TP, FP, TN and FN numbers
     
     m = tf.keras.metrics.TruePositives()
@@ -274,137 +255,31 @@ def test_nn(name,val_set,model,x_tests,y_test,seq):
     
     specicifity = TN / (TN + FP)
     
+    precision = TP / (TP + FP)
+    
     F1 = TP / ( TP + FP/2 + FN/2 )
     
-    print("OUTPUT NUCLEOTIDE",Training_species,Kmer_species,Test_species,"SN",np.round(sensitivity,3),"SP",np.round(specicifity,3),"F1",np.round(F1,3),"ACC",np.round(Accuracy,3),"CDSF",np.round(cds_fraction,3))
+    print("Initial results:","SN",np.round(sensitivity,3),"SP",np.round(specicifity,3),"PPV",np.round(precision,3),"F1",np.round(F1,3),"ACC",np.round(Accuracy,3),"CDSF",np.round(cds_fraction,3))
     
     ############ run CDS prediction algorithm
     
     Adjust_predictions(min_cds_length,max_cds_length,result_array,seq)
-    
-##%%
-#
-#Test_species="Drosophila_2L"
-#models = []
-#        
-#for i in range(0,cross_validation):
-#    models.append(keras.models.load_model(f"./Trained_models/Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}_validation_{i}"))    
-#
-#print("--------------------------------------------------")
-#
-#print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
-#
-#x_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/x_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#x_tests = Data_min_max_scaler(x_test)
-#del x_test
-#gc.collect()
-#
-#y_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/y_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#
-#seq = f"./Test_datasets/{Test_species}/{Kmer_species}/s_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
-#
-#for i in range(0,cross_validation):
-#    test_nn(f"Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}",
-#            i,models[i],x_tests,y_test,seq)
-#   
-#    
-#print(f"END RESULTS {Training_species}/{Test_species} {Training_fraction}")
-#
-##%%
-#
-#Test_species="Human_21"
-#models = []
-#
-#for i in range(0,cross_validation):
-#    models.append(keras.models.load_model(f"./Trained_models/Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}_validation_{i}"))
-#
-#print("--------------------------------------------------")
-#
-#print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
-#
-#x_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/x_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#x_tests = Data_min_max_scaler(x_test)
-#del x_test
-#gc.collect()
-#
-#y_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/y_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#
-#seq = f"./Test_datasets/{Test_species}/{Kmer_species}/s_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
-#
-#for i in range(0,cross_validation):
-#    test_nn(f"Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}",
-#            i,models[i],x_tests,y_test,seq)
-#
-#print(f"END RESULTS {Training_species}/{Test_species} {Training_fraction}")
-#
-##%%
-#
-#Test_species="Mouse_19"
-#models = []
-#
-#for i in range(0,cross_validation):
-#    models.append(keras.models.load_model(f"./Trained_models/Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}_validation_{i}"))
-#
-#print("--------------------------------------------------")
-#
-#print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
-#
-#x_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/x_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#x_tests = Data_min_max_scaler(x_test)
-#del x_test
-#gc.collect()
-#
-#y_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/y_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#
-#seq = f"./Test_datasets/{Test_species}/{Kmer_species}/s_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
-#
-#for i in range(0,cross_validation):
-#    test_nn(f"Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}",
-#            i,models[i],x_tests,y_test,seq)
-#
-#print(f"END RESULTS {Training_species}/{Test_species} {Training_fraction}")
-#
-##%%
-#
-#Test_species="Worm_I"
-#models = []
-#
-#for i in range(0,cross_validation):
-#    models.append(keras.models.load_model(f"./Trained_models/Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}_validation_{i}"))
-#
-#print("--------------------------------------------------")
-#
-#print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
-#
-#x_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/x_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#x_tests = Data_min_max_scaler(x_test)
-#del x_test
-#gc.collect()
-#
-#y_test = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/y_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
-#
-#seq = f"./Test_datasets/{Test_species}/{Kmer_species}/s_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
-#
-#for i in range(0,cross_validation):
-#    test_nn(f"Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}",
-#            i,models[i],x_tests,y_test,seq)
-#
-#print(f"END RESULTS {Training_species}/{Test_species} {Training_fraction}")
 
 #%%
 
-for Test_species in species_list:
+for Test_sequence in sequence_list:
     
     models = []
 
-    for i in range(0,cross_validation):
+    for i in cross_validation:
         models.append(keras.models.load_model(f"./Trained_models/Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}_val_{i}"))
     
-    print("--------------------------------------------------")
+#    print("--------------------------------------------------")
+    print("Test Sequence:",Test_sequence)
     
-    print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
+#    print("TEST PARAMETERS",Training_species,Kmer_species,"ST",set_title,"NPL",Neurons_per_layer,"TF",Training_fraction,"WS",window_size)
     
-    test_data = np.load(f"./Test_datasets/{Test_species}/{Kmer_species}/x_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
+    test_data = np.load(f"./Test_datasets/{Test_sequence}/{Kmer_species}/x_{Test_sequence}_{set_title}_ws{window_size}_ks_{Kmer_species}_test.npy")
 
     x_test = test_data[:,0:-1] # Sensor data
     x_tests = Data_min_max_scaler(x_test)
@@ -413,11 +288,11 @@ for Test_species in species_list:
     
     y_test = test_data[:,-1] # labels
     
-    seq = f"./Test_datasets/{Test_species}/{Kmer_species}/s_{Test_species}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
+    seq = f"./Test_datasets/{Test_sequence}/{Kmer_species}/s_{Test_sequence}_{set_title}_ws{window_size}_ks_{Kmer_species}_sequence.txt"
     
-    for i in range(0,cross_validation):
+    for i in cross_validation:
         test_nn(f"Dense_model_{set_title}_{Neurons_per_layer}_{Training_species}_{Training_fraction}",
                 i,models[i],x_tests,y_test,seq)
     
-    print(f"END RESULTS {Training_species}/{Test_species} {Training_fraction}")
+#    print(f"END RESULTS {Training_species}/{Test_sequence} {Training_fraction}")
 

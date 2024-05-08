@@ -12,9 +12,9 @@ import os
 
 ################################# PARAMETERS #################################
 
-species_list = ["Drosophila_2L_minimal"]
+sequence_list = ["Drosophila_2L_minimal"]
 set_title = "DFT"
-nepochs = 2
+nepochs = 1
 Neurons_per_layer = "10D"
 Training_fraction = "p50"
 window_size = 69
@@ -111,7 +111,7 @@ def train_nn(species,name,val_set):
   
 #%%
     
-for i in range(len(species_list)):        
+for i in range(len(sequence_list)):        
     for j in range(0,cross_validation):
         
-        train_nn(species_list[i],f"Dense_model_{set_title}_10D_{species_list[i]}_{Training_fraction}",j)
+        train_nn(sequence_list[i],f"Dense_model_{set_title}_10D_{sequence_list[i]}_{Training_fraction}",j)

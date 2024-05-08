@@ -11,7 +11,7 @@ import os
 
 ################################# PARAMETERS #################################
 
-species_list = ["Drosophila_2L_minimal"]
+sequence_list = ["Drosophila_2L_minimal"]
 window_size = 69
 set_title = "DFT"
 n_samples = 10
@@ -136,7 +136,7 @@ def Run_generate_training_dataset(species,ws,set_title,
 
 #%%
 
-for i in range(len(species_list)):  
+for i in range(len(sequence_list)):  
         
-    Run_generate_training_dataset(species_list[i],window_size,set_title,
+    Run_generate_training_dataset(sequence_list[i],window_size,set_title,
                                   n_samples,positive_fraction)

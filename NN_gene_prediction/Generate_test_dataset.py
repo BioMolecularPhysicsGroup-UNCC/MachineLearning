@@ -10,7 +10,7 @@ import os
 
 ################################# PARAMETERS #################################
 
-species_list = ["Drosophila_2L_minimal"]
+sequence_list = ["A0A024G196_9STRA"]
 kmer_species_list = ["Drosophila_2L_minimal"]
 window_size = 69
 set_title = "DFT"
@@ -89,8 +89,8 @@ def Run_generate_test_dataset(species,ws,kmer_species,set_title):
 
 #%%
         
-for i in range(len(species_list)):
+for i in range(len(sequence_list)):
     for j in range(len(kmer_species_list)):        
         
-        Run_generate_test_dataset(species_list[i],window_size,
+        Run_generate_test_dataset(sequence_list[i],window_size,
                              kmer_species_list[j],set_title)

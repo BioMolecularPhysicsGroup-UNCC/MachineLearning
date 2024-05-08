@@ -10,15 +10,18 @@ import os
 
 #%%
 
+### This script is for use running sensors on .gar file format only
+
 ################################# PARAMETERS #################################
 
-sequence_list = ["Drosophila_2L_minimal"]
+sequence_list = ["A0A024G196_9STRA"]
 chromosome_list = ["2L"]
 kmer_species_list = ["Drosophila_2L_minimal"]
 kmer_chromosome_list = ["2L"]
 window_size = 69
 n_sensors = 16
 kmer_training_multiplier = 0.001
+flanking_bp = 150
 
 ############################### END PARAMETERS ###############################
 
@@ -387,7 +390,7 @@ def Sensor_sweep(seq, target_nt,ws,k6_sensor,k5_sensor,k4_sensor,k3_sensor,k2_se
     
 class Data_generator():
     
-    def __init__(self,ws,ns,ktm):
+    def __init__(self,ws,ns,ktm,flanking_bp):
         
         self.fasta_input = "Drosophila_2L_minimal.fna" # my filename for the input fasta file
         self.gff_input = "Drosophila_2L_minimal.gff3" # my filename for the input gff file
@@ -400,6 +403,7 @@ class Data_generator():
         self.kmer_chromosome = "2L"
         self.window_size = ws
         self.kmer_training_multiplier = ktm
+        self.flanking_bp = flanking_bp
         
 # Reads a gff file and stores the start and stop coordinates for each feature of the given type
 # Reads a fasta file to generate a DNA string object for use by other functions
@@ -408,18 +412,24 @@ class Data_generator():
 # Label string has '0' where there is no feature of the given type (eg. CDS)
 # Locations of features (eg. CDS) are extracted from inout gff file
         
-    def Generate_sequence_and_labels(self):
 
+    def Generate_sequence_and_labels(self):
         self.slice0 = []
         
-        with open(self.gff_input) as gff_file:
-            gff = gff_file.readlines()
-            for line in gff:
-                if line.split()[0] == self.chromosome:
-                    if line.split()[2] == self.feature:
-                        if line.split()[6] == "+":
-                            self.slice0.append((line.split()[3],line.split()[4]))
-                                
+        generate_sequence = 0
+        strand = 0
+        
+        with open(self.gff_input) as gar_file:
+            gar = gar_file.readlines()
+            for line in gar:
+                if line[0:4] == "Exon":
+                    if line.split()[4] == "1":
+                        
+                        print("Exon located on forward strand")
+                        
+                        self.slice0.append((line.split()[1],line.split()[2]))
+                        
+                        if generate_sequence == 0:
                             genome = open(self.fasta_input)
                     
                             lines = genome.readlines()
@@ -432,13 +442,60 @@ class Data_generator():
                             self.DNASeq = ''.join(DNASeq0)
                             
                             self.DNALabels = np.zeros((len(self.DNASeq)))
+                            
+                            generate_sequence = 1
+                            strand = 1
                     
-                            for j in range(0,len(self.slice0)):
-                                start = int(self.slice0[j][0])
-                                stop = int(self.slice0[j][1])
-                                if stop < len(self.DNASeq):
-                                    for k in range(start,stop):
-                                        self.DNALabels[k] = 1
+                    if line.split()[4] == "-1":
+                        
+                        print("Exon located on reverse strand")
+                        
+                        self.slice0.append((line.split()[1],line.split()[2]))
+                                
+                        if generate_sequence == 0:
+                            genome = open(self.fasta_input)
+                
+                            lines = genome.readlines()
+                            DNASeq0 = []
+                            for i in range (0, len(lines)):
+                                if lines[i][0:1] != ">":
+                                    DNASeq0.append(lines[i].strip("\n"))
+                            genome.close()
+                            
+                            self.DNASeq_forward = ''.join(DNASeq0)
+                            
+                            old_chars = "ACGTacgt"
+                            replace_chars = "TGCATGCA"
+                            tab = str.maketrans(old_chars,replace_chars)
+                            
+                            self.DNASeq = self.DNASeq_forward.translate(tab)[::-1]
+                            
+                            self.DNALabels = np.zeros((len(self.DNASeq)))
+                            
+                            generate_sequence = 1
+                            strand = -1
+                            
+            if strand == 1:
+                for j in range(0,len(self.slice0)):
+                    start = int(self.slice0[j][0]) + self.flanking_bp
+                    stop = int(self.slice0[j][1]) + self.flanking_bp
+                    if stop < len(self.DNASeq):
+                        for k in range(start,stop):
+                            self.DNALabels[k] = 1
+                    else:
+                        print(self.gar_input," coordinates do not match ",self.fasta_input," file.")
+                    print(f"Start/stop motif:{self.DNASeq[start-3:start+3]}/{self.DNASeq[stop-3:stop+3]}")
+            
+            if strand == -1:
+                for j in range(0,len(self.slice0)):
+                    start = -int(self.slice0[j][1]) + self.flanking_bp
+                    stop = -int(self.slice0[j][0]) + self.flanking_bp
+                    if -start < len(self.DNASeq):
+                        for k in range(start,stop):
+                            self.DNALabels[k] = 1
+                    else:
+                        print(self.gar_input," coordinates do not match ",self.fasta_input," file.")
+                    print(f"Start/stop motif:{self.DNASeq[start-3:start+3]}/{self.DNASeq[stop-3:stop+3]}")
 
 #%%
                                  
@@ -525,13 +582,12 @@ class Data_generator():
     
 #%%
 
-def Generate_sensor_data(species,window_size,
-                             nsensors,kmer_species,chromosome,kmer_chromosome,
-                             kmer_training_multiplier):
+def Generate_sensor_data(species,window_size,nsensors,kmer_species,chromosome,
+                         kmer_chromosome,kmer_training_multiplier):
     
     hws = int( (window_size - 1 ) / 2 )
 
-    Data = Data_generator(window_size,nsensors,kmer_training_multiplier)
+    Data = Data_generator(window_size,nsensors,kmer_training_multiplier,flanking_bp)
     
     fasta_path = "./fasta_files/"
     gff_path = "./gff_files/"
@@ -542,8 +598,8 @@ def Generate_sensor_data(species,window_size,
     if not os.path.isdir(path):
         os.mkdir(path)
         
-    Data.fasta_input = fasta_path + species + ".fna"
-    Data.gff_input = gff_path + species + ".gff3"
+    Data.fasta_input = fasta_path + species + ".fasta"
+    Data.gff_input = gff_path + species + ".gar"
     Data.chromosome = chromosome
     
     Data.kmer_fasta_input = fasta_path + kmer_species + ".fna"
@@ -575,8 +631,6 @@ def Generate_sensor_data(species,window_size,
     print("Sensor data array dimensions:",data_array.shape)
     
     np.save(f"{output_path}{species}_ws{window_size}_kmers_{kmer_species}_sensor_data",data_array)
-    
-    np.savetxt(f"{output_path}{species}_ws{window_size}_kmers_{kmer_species}_sensor_data.csv",data_array, delimiter =",",fmt ='%s',comments='')
     
     with open(f"{output_path}{species}_ws{window_size}_kmers_{kmer_species}_sensor_sequence.txt", 'w') as f:
         f.write(sequence)
