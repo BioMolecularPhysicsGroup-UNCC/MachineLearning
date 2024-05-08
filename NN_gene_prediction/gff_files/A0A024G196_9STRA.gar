@@ -1,0 +1,9 @@
+# Transcrit_1;CCI40534;A0A024G196_9STRA;Struct_A09S
+> 2 exons 
+> Len_mRNA:1292;Len_CDS:1237
+
+Exon_1	1	1064	1064	1
+Exon_2	1121	1292	172	1
+
+Intron_1	1065	1120	56	1
+
